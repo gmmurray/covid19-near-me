@@ -1,0 +1,27 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "back end for covid-19 statistics tracking",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gmmurray/covid-19-near-me.git"
+  },
+  "author": "gmmurray",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gmmurray/covid-19-near-me/issues"
+  },
+  "homepage": "https://github.com/gmmurray/covid-19-near-me#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "json-stringify-safe": "^5.0.1",
+    "novelcovid": "^1.0.7-b3"
+  }
+}
