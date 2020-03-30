@@ -36,7 +36,9 @@ const Countries = () => {
 			return;
 		}
 
-		setHistoricalData(await formatData(historicalResult.data));
+		if (historicalResult.data.timeline.cases) {
+			setHistoricalData(await formatData(historicalResult.data));
+		}
 		setHistoricalLoading(false);
 	};
 
