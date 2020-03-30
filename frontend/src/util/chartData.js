@@ -1,4 +1,8 @@
 export const formatData = data => {
+	if (!(Object.keys(data.timeline.cases).length > 0)) {
+		return {undefined};
+	}
+
 	const country = data.country;
 	const cases = [];
 	const deaths = [];

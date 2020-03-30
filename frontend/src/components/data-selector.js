@@ -46,7 +46,7 @@ const DataSelector = props => {
 							</div>
 						</div>
 						<div className="control">
-							<button className="button is-success" type="submit" disabled={props.isLoading}>
+							<button className="button is-success" type="submit" disabled={props.isLoading && !props.networkError}>
 								Get Data
 							</button>
 						</div>

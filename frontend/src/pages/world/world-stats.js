@@ -13,7 +13,7 @@ const WorldStats = props => {
 				<Container className="has-text-centered">
 					<h1 className="is-size-3">
 						Sorry, we encountered an error while trying to connect.
-						Select a state to try again.
+						Refresh to try again.
 					</h1>
 				</Container>
 			</section>

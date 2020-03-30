@@ -67,7 +67,7 @@ const World = () => {
 						<button
 							onClick={refreshData}
                             className="button is-success"
-                            disabled={statsLoading || impactedLoading}
+                            disabled={statsLoading || impactedLoading && !networkError}
 						>
 							Refresh Data
 						</button>

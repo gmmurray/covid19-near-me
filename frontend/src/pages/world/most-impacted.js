@@ -2,6 +2,8 @@ import React from 'react';
 import Spinner from '../../components/spinner';
 import Container from '../../components/container';
 
+import './styles.scss';
+
 const MostImpacted = props => {
 	const { data } = props;
 

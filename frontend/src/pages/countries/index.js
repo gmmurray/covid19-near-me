@@ -31,14 +31,12 @@ const Countries = () => {
 		setCurrentCountry(dataResult.data);
 		setStatsLoading(false);
 
-		if (dataResult.data.message) {
+		if (!historicalData) {
 			setHistoricalLoading(false);
+			setHistoricalData(undefined);
 			return;
 		}
-
-		if (historicalResult.data.timeline.cases) {
-			setHistoricalData(await formatData(historicalResult.data));
-		}
+		setHistoricalData(await formatData(historicalResult.data));
 		setHistoricalLoading(false);
 	};
 
@@ -50,6 +48,7 @@ const Countries = () => {
 					list={listOfCountries}
 					size="fullwidth"
 					isLoading={statsLoading || historicalLoading}
+					networkError={networkError}
 				/>
 
 				<SingleCountry

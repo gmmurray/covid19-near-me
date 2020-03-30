@@ -7,7 +7,7 @@ const MobileHistory = props => {
 			<ul>
 				{props.data.map((element, i) => (
 					<li key={i}>
-						{element.date}
+						<strong>{element.date}</strong>
 						<ul key={i}>
 							{element.cases > 0 ? (
 								<li key={`${i}-cases}`}>
@@ -36,6 +36,7 @@ const MobileHistory = props => {
 								</li>
 							)}
 						</ul>
+						<hr />
 					</li>
 				))}
 			</ul>
