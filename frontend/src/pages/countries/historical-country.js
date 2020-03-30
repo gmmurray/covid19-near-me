@@ -5,7 +5,7 @@ import BarChart from '../../components/charts/bar';
 import MobileHistory from './mobile-history';
 
 const HistoricalCountry = props => {
-	const { country } = props.historicalData;
+	const { country, timeline, chartData, mobileData } = props.historicalData;
 
 	if (props.networkError) {
 		return <></>;
@@ -21,7 +21,7 @@ const HistoricalCountry = props => {
 		);
 	}
 
-	if (!country) {
+	if (!country || !timeline.cases) {
 		return (
 			<section className="section">
 				<Container className="has-text-centered">
@@ -34,10 +34,10 @@ const HistoricalCountry = props => {
 	return (
 		<section className="section">
 			<Container className="has-text-centered is-hidden-touch">
-				<BarChart chartData={props.historicalData.chartData} />
+				<BarChart chartData={chartData} />
 			</Container>
 			<Container className="has-text-centered is-hidden-desktop">
-				<MobileHistory data={props.historicalData.mobileData} />
+				<MobileHistory data={mobileData} />
 			</Container>
 		</section>
 	);

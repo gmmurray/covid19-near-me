@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const BASE_URL = 'http://localhost:5000/api';
+export const BASE_URL = 'https://covid19-near-me-backend.herokuapp.com/api';
 
 export const getState = async state => {
 	let result;
