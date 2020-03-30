@@ -16,7 +16,7 @@ import Footer from './components/footer';
 
 function App() {
 	return (
-		<Router>
+		<Router basename="covid19-near-me">
 			<Switch>
 				<Route path="/states">
 					<Hero
