@@ -16,6 +16,13 @@ const getCountryData = async country => {
 	return result;
 };
 
+const getSortedCountryData = async sort => {
+	let result = sort
+		? await covid.getCountry({ sort })
+		: await covid.getCountry();
+	return result;
+};
+
 const getWorldData = async () => {
 	return await covid.getAll();
 };
@@ -30,6 +37,7 @@ const getHistoricalData = async country => {
 module.exports = {
 	getStateData,
 	getCountryData,
+	getSortedCountryData,
 	getWorldData,
 	getHistoricalData,
 };

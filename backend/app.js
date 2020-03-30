@@ -1,19 +1,34 @@
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
 
 require('dotenv').config();
 
 const app = express();
 
-app.use(cors({origin: process.env.CORS_URL}));
+
+const whitelist = [process.env.CORS_URL];
+const corsOptions = {
+	origin: (origin, callback) => {
+		if (whitelist.indexOf(origin) !== -1) {
+			callback(null, true);
+		} else {
+			callback(new Error('Not allowed by CORS'));
+		}
+	},
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
+
+app.use(helmet());
 
 app.use('/api', require('./api/'));
 
 app.listen(process.env.PORT || 5000, err => {
-    if (err) {
-        console.log(err);
-    } else {
-        console.log('Server is listening...');
-    }
+	if (err) {
+		console.log(err);
+	} else {
+		console.log('Server is listening...');
+	}
 });

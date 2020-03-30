@@ -1,11 +1,10 @@
 const router = require('express').Router();
 const { getStateData } = require('../services/novelCovidAPI');
+const { getGovernor } = require('../services/governors');
 
-const {getGovernor} = require('../services/governors');
-
-router.get('/', async (req, res) => {
+router.get('/:name', async (req, res) => {
 	try {
-		const result = await getStateData(req.query.name);
+		const result = await getStateData(req.params.name);
 		res.status(200).json(result);
 	} catch (error) {
 		res.status(400).json({ error });
