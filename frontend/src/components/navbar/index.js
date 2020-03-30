@@ -39,13 +39,6 @@ const Navbar = () => {
 				>
 					<div className="navbar-start">
 						<NavLink
-							to="/overview"
-							className="navbar-item"
-							activeClassName="active"
-						>
-							Overiew
-						</NavLink>
-						<NavLink
 							to="/states"
 							className="navbar-item"
 							activeClassName="active"
