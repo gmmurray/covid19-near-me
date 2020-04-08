@@ -37,7 +37,7 @@ const findRecentGovCoronaVirusTweets = async (state, numTweets) => {
 		throw 'No tweets found for given user';
 	}
 
-	// return only ids and time stamps
+	// return only ids and time stamps TODO use numTweets to return only a certain number of tweets
 	// return filteredTweets.map(element => {return {id: element.id, timeStamp: element.created_at}});
 	return filteredTweets;
 };
