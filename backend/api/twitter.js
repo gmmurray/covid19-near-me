@@ -1,7 +1,13 @@
 const router = require('express').Router();
+const { findRecentGovCoronaVirusTweets } = require('../services/twitterAPI');
 
-router.get('/', (req, res) => {
-    res.send('twitter endpoint');
+router.get('/governor', async (req, res) => {
+    try {
+        const result = await findRecentGovCoronaVirusTweets(req.query.state, null);
+        res.json(result);
+    } catch (error) {
+        res.json({error})
+    }
 });
 
 // get tweets for governor - api/states

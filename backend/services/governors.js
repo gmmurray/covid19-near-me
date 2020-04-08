@@ -1,20 +1,8 @@
 // Data for US governors comes from https://github.com/CivilServiceUSA/us-governors
 
 const getGovernor = state => {
-	const {
-		name,
-		state_name,
-		state_code,
-		twitter_handle,
-		twitter_url,
-	} = governors.filter(item => item.state_name.toLowerCase().includes(state.toLowerCase()))[0];
-	return {
-		name,
-		state_name,
-		state_code,
-		twitter_handle,
-		twitter_url,
-	};
+	const governor = governors.filter(item => item.state_name.toLowerCase().includes(state.toLowerCase()))[0];
+	return governor;
 };
 
 module.exports = {
@@ -64,8 +52,8 @@ const governors = [
 		website: 'http://governor.alabama.gov',
 		contact_page: 'http://governor.alabama.gov/contact',
 		facebook_url: 'https://www.facebook.com/KayIveyAL',
-		twitter_handle: 'LtGovIvey',
-		twitter_url: 'https://twitter.com/LtGovIvey',
+		twitter_handle: 'GovernorKayIvey',
+		twitter_url: 'https://twitter.com/GovernorKayIvey',
 		photo_url:
 			'https://cdn.civil.services/us-governors/headshots/512x512/kay-ivey.jpg',
 	},
@@ -447,8 +435,8 @@ const governors = [
 		website: 'http://www.flgov.com/',
 		contact_page: 'https://www.flgov.com/contact-governor/',
 		facebook_url: 'https://www.facebook.com/RonDeSantisFlorida/',
-		twitter_handle: 'rondesantisfl',
-		twitter_url: 'https://twitter.com/rondesantisfl',
+		twitter_handle: 'govrondesantis',
+		twitter_url: 'https://twitter.com/govrondesantis',
 		photo_url:
 			'https://cdn.civil.services/us-governors/headshots/512x512/ronald-desantis.jpg',
 	},

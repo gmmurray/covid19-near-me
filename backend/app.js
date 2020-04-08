@@ -6,7 +6,6 @@ require('dotenv').config();
 
 const app = express();
 
-
 const whitelist = [process.env.CORS_URL];
 const corsOptions = {
 	origin: (origin, callback) => {
@@ -18,17 +17,16 @@ const corsOptions = {
 	},
 };
 
-app.use(cors(corsOptions));
+if (process.env.NODE_ENV === 'development') app.use(cors());
+else app.use(cors(corsOptions));
+
 app.use(express.json());
 
 app.use(helmet());
 
 app.use('/api', require('./api/'));
 
-app.listen(process.env.PORT || 5000, err => {
-	if (err) {
-		console.log(err);
-	} else {
-		console.log('Server is listening...');
-	}
+app.listen(process.env.PORT, (err) => {
+	if (err) console.log(err);
+	else console.log(`Server is listening on port ${process.env.PORT}...`);
 });
