@@ -26,7 +26,7 @@ app.use(helmet());
 
 app.use('/api', require('./api/'));
 
-app.listen(process.env.PORT, (err) => {
+app.listen(process.env.PORT, err => {
 	if (err) console.log(err);
 	else console.log(`Server is listening on port ${process.env.PORT}...`);
 });

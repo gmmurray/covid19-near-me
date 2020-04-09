@@ -1,12 +1,20 @@
 // Data for US governors comes from https://github.com/CivilServiceUSA/us-governors
 
 const getGovernor = state => {
-	const governor = governors.filter(item => item.state_name.toLowerCase().includes(state.toLowerCase()))[0];
+	const governor = governors.filter(item =>
+		item.state_name.toLowerCase().includes(state.toLowerCase()),
+	)[0];
+	governor.twitter_handle = cleanTwitterHandle(governor.twitter_handle);
+
 	return governor;
 };
 
 module.exports = {
 	getGovernor,
+};
+
+const cleanTwitterHandle = username => {
+	return username.replace('/', '');
 };
 
 const governors = [
@@ -815,8 +823,8 @@ const governors = [
 		website: 'http://governor.ky.gov',
 		contact_page: 'http://governor.ky.gov/pages/contact.aspx',
 		facebook_url: 'https://www.facebook.com/GovMattBevin',
-		twitter_handle: 'GovMattBevin',
-		twitter_url: 'https://twitter.com/GovMattBevin',
+		twitter_handle: 'GovAndyBeshear',
+		twitter_url: 'https://twitter.com/GovAndyBeshear',
 		photo_url:
 			'https://cdn.civil.services/us-governors/headshots/512x512/matthew-bevin.jpg',
 	},
@@ -1672,7 +1680,7 @@ const governors = [
 		website: 'http://governor.ohio.gov/',
 		contact_page: 'https://governor.ohio.gov/Contact/Contact-the-Governor',
 		facebook_url: 'https://www.facebook.com/MikeDeWine',
-		twitter_handle: 'mikedewine?lang=en',
+		twitter_handle: 'mikedewine',
 		twitter_url: 'https://twitter.com/mikedewine?lang=en',
 		photo_url:
 			'https://cdn.civil.services/us-governors/headshots/512x512/michael-dewine.jpg',
@@ -1721,8 +1729,8 @@ const governors = [
 		contact_page:
 			'https://www.ok.gov/governor/Contact_the_Governor/index.html',
 		facebook_url: 'https://www.facebook.com/StittForGovernor/',
-		twitter_handle: 'StittforGov',
-		twitter_url: 'https://twitter.com/StittforGov',
+		twitter_handle: 'GovStitt',
+		twitter_url: 'https://twitter.com/GovStitt',
 		photo_url:
 			'https://cdn.civil.services/us-governors/headshots/512x512/kevin-stitt.jpg',
 	},
@@ -1911,8 +1919,8 @@ const governors = [
 		website: 'http://governor.sc.gov/Pages/default.aspx',
 		contact_page: 'http://governor.sc.gov/Contact/Pages/default.aspx',
 		facebook_url: 'https://www.facebook.com/HenryMcMaster',
-		twitter_handle: 'SCGOVOFFICE',
-		twitter_url: 'https://twitter.com/SCGOVOFFICE',
+		twitter_handle: 'henrymcmaster',
+		twitter_url: 'https://twitter.com/henrymcmaster',
 		photo_url:
 			'https://cdn.civil.services/us-governors/headshots/512x512/henry-mcmaster.jpg',
 	},
@@ -2053,8 +2061,8 @@ const governors = [
 		website: 'http://gov.texas.gov/',
 		contact_page: 'https://gov.texas.gov/contact/',
 		facebook_url: 'https://www.facebook.com/TexasGovernor',
-		twitter_handle: 'TexGov',
-		twitter_url: 'https://twitter.com/TexGov',
+		twitter_handle: 'GregAbbott_TX',
+		twitter_url: 'https://twitter.com/GregAbbott_TX',
 		photo_url:
 			'https://cdn.civil.services/us-governors/headshots/512x512/gregory-abbott.jpg',
 	},
@@ -2102,8 +2110,8 @@ const governors = [
 		contact_page:
 			'https://gocentral.utah.gov/Request/Contact?response=true',
 		facebook_url: 'https://www.facebook.com/GovGaryHerbert',
-		twitter_handle: 'governorherbert',
-		twitter_url: 'https://twitter.com/governorherbert',
+		twitter_handle: 'GovHerbert',
+		twitter_url: 'https://twitter.com/GovHerbert',
 		photo_url:
 			'https://cdn.civil.services/us-governors/headshots/512x512/gary-herbert.jpg',
 	},

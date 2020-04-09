@@ -1,8 +1,11 @@
 const router = require('express').Router();
-const { getWorldData, getHistoricalData } = require('../services/novelCovidAPI');
+const {
+	getWorldData,
+	getHistoricalData,
+} = require('../services/novelCovidAPI');
 
 router.get('/', async (req, res) => {
-    try {
+	try {
 		const result = await getWorldData();
 		res.status(200).json(result);
 	} catch (error) {
@@ -11,7 +14,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/historical', async (req, res) => {
-    try {
+	try {
 		const result = await getHistoricalData();
 		res.status(200).json(result);
 	} catch (error) {

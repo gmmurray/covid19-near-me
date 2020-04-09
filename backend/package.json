@@ -4,7 +4,8 @@
   "description": "back end for covid-19 statistics tracking",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "start:dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -26,5 +27,10 @@
     "novelcovid": "^1.0.7-b3",
     "twitter": "^1.7.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^2.0.4"
+  }
 }

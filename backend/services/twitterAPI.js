@@ -9,11 +9,29 @@ const client = new Twitter({
 	access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
 });
 
-const getTweetsByUsername = (username) => {
+const searchTerms = [
+	'corona',
+	'coronavirus',
+	'corona virus',
+	'covid',
+	'quarantine',
+	'ventilator',
+	'case',
+	'hospital',
+];
+
+const filterTweets = tweets => {
+	return tweets.filter(tweet => {
+		const normalizedTweetText = tweet.text.toLowerCase();
+		return searchTerms.some(term => normalizedTweetText.includes(term));
+	});
+};
+
+const getTweetsByUsername = (username, includeRetweets = false) => {
 	const queryObj = {
 		screen_name: username,
 		exclude_replies: true,
-		include_rts: false,
+		include_rts: includeRetweets,
 		count: 1000,
 	};
 
@@ -23,35 +41,29 @@ const getTweetsByUsername = (username) => {
 const findRecentGovCoronaVirusTweets = async (state, numTweets) => {
 	const governor = getGovernor(state);
 
-    if (!governor) throw 'Invalid or missing governor';
-    
-    const tweets = await getTweetsByUsername(governor.twitter_handle);
-    
-	const filteredTweets = tweets.filter((tweet) => {
-		const normalizedTweetText = tweet.text.toLowerCase();
+	if (!governor) throw 'Invalid or missing governor';
 
-		return searchTerms.some((term) => normalizedTweetText.includes(term));
-	});
+	const tweets = await getTweetsByUsername(governor.twitter_handle);
+
+	let filteredTweets = filterTweets(tweets);
 
 	if (!filteredTweets.length) {
-		throw 'No tweets found for given user';
+		const tweetsWithRetweets = await getTweetsByUsername(
+			governor.twitter_handle,
+			true,
+		);
+
+		// If there are no tweets, try getting tweets again but including retweets this time
+		filteredTweets = filterTweets(tweetsWithRetweets);
+
+		if (!filteredTweets.length)
+			throw 'No applicable tweets found for given user';
 	}
 
 	// return only ids and time stamps TODO use numTweets to return only a certain number of tweets
 	// return filteredTweets.map(element => {return {id: element.id, timeStamp: element.created_at}});
 	return filteredTweets;
 };
-
-const searchTerms = [
-	'corona',
-	'coronavirus',
-	'corona virus',
-	'covid',
-    'quarantine',
-    'ventilator',
-    'case',
-    'hospital',
-];
 
 module.exports = {
 	getTweetsByUsername,
