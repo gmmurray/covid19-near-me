@@ -1,6 +1,6 @@
 {
     "env": {
-        "browser": true,
+        "node": true,
         "commonjs": true,
         "es6": true
     },
@@ -13,5 +13,6 @@
         "ecmaVersion": 2018
     },
     "rules": {
+        "linebreak-style": [0, "windows"]
     }
 }
