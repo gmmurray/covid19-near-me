@@ -51,3 +51,13 @@ export const getWorldMostImpacted = async () => {
 	}
 	return result;
 };
+
+export const getOverviewData = async state => {
+	let result;
+	try {
+		result = await axios.get(`${BASE_URL}/overview/${state}`);
+	} catch (error) {
+		result = undefined;
+	}
+	return result;
+}

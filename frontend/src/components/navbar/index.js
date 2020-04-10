@@ -18,6 +18,7 @@ const Navbar = () => {
 		>
 			<Container>
 				<div className="navbar-brand">
+					{/* eslint-disable-next-line */}
 					<a
 						role="button"
 						className={`navbar-burger ${
@@ -38,6 +39,13 @@ const Navbar = () => {
 					}`}
 				>
 					<div className="navbar-start">
+						<NavLink
+							to="/overview"
+							className="navbar-item"
+							activeClassName="active"
+						>
+							Overview
+						</NavLink>
 						<NavLink
 							to="/states"
 							className="navbar-item"

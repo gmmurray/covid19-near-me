@@ -6,6 +6,7 @@ import {
 	Redirect,
 } from 'react-router-dom';
 
+import Overview from './pages/overview/'
 import States from './pages/states/';
 import Countries from './pages/countries/';
 import World from './pages/world/';
@@ -18,6 +19,15 @@ function App() {
 	return (
 		<Router basename="covid19-near-me">
 			<Switch>
+				<Route path="/overview">
+					<Hero
+						title="Overview"
+						color="dark"
+						size="medium"
+					/>
+					<Navbar />
+					<Overview />
+				</Route>
 				<Route path="/states">
 					<Hero
 						title="Individual U.S. State Data"
@@ -42,7 +52,7 @@ function App() {
 					<World />
 				</Route>
 				<Route path="/">
-					<Redirect to="/states" />
+					<Redirect to="/overview" />
 				</Route>
 			</Switch>
 			<Footer />

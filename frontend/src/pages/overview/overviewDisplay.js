@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Overiew = () => {
+const OverviewDisplay = () => {
     return (
         <div>
-            Overiew
+            
         </div>
     )
 }
 
-export default Overiew
+export default OverviewDisplay

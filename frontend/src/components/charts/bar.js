@@ -9,6 +9,7 @@ const BarChart = props => {
 		secondaryCursorValue: null,
 	});
 
+	// eslint-disable-next-line
 	const data = useMemo(() => props.chartData);
 	const series = useMemo(
 		() => ({
