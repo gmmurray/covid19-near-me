@@ -1,8 +1,9 @@
 import React from 'react';
 import Spinner from '../../components/spinner';
 import Container from '../../components/container';
+import Level from '../../components/level';
 
-const SingleState = props => {
+const SingleState = (props) => {
 	const {
 		state,
 		cases,
@@ -11,6 +12,14 @@ const SingleState = props => {
 		todayDeaths,
 		active,
 	} = props.currentState;
+
+	const items = [
+		{ name: 'Cases', statistic: cases },
+		{ name: 'Cases Today', statistic: todayCases },
+		{ name: 'Deaths', statistic: deaths },
+		{ name: 'Deaths Today', statistic: todayDeaths },
+		{ name: 'Active', statistic: active },
+	];
 
 	if (props.networkError) {
 		return (
@@ -46,43 +55,7 @@ const SingleState = props => {
 	}
 
 	return (
-		<section className="section">
-			<Container className="has-text-centered">
-				<h1 className="is-size-1">{state}</h1>
-				<nav className="level">
-					<div className="level-item has-text-centered">
-						<div>
-							<p className="heading">Cases</p>
-							<p className="title">{cases}</p>
-						</div>
-					</div>
-					<div className="level-item has-text-centered">
-						<div>
-							<p className="heading">Cases Today</p>
-							<p className="title">{todayCases}</p>
-						</div>
-					</div>
-					<div className="level-item has-text-centered">
-						<div>
-							<p className="heading">Deaths</p>
-							<p className="title">{deaths}</p>
-						</div>
-					</div>
-					<div className="level-item has-text-centered">
-						<div>
-							<p className="heading">Deaths Today</p>
-							<p className="title">{todayDeaths}</p>
-						</div>
-					</div>
-					<div className="level-item has-text-centered">
-						<div>
-							<p className="heading">Active</p>
-							<p className="title">{active}</p>
-						</div>
-					</div>
-				</nav>
-			</Container>
-		</section>
+		<Level title={state} items={items} />
 	);
 };
 
