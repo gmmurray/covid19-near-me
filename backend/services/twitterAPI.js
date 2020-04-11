@@ -18,6 +18,7 @@ const searchTerms = [
 	'ventilator',
 	'case',
 	'hospital',
+	'pandemic',
 ];
 
 const filterTweets = tweets => {
@@ -32,7 +33,7 @@ const getTweetsByUsername = (username, includeRetweets = false) => {
 		screen_name: username,
 		exclude_replies: true,
 		include_rts: includeRetweets,
-		count: 1000,
+		count: 500,
 	};
 
 	return client.get('/statuses/user_timeline', queryObj);
@@ -63,10 +64,9 @@ const findRecentGovCoronaVirusTweets = async (state, numTweets = 3) => {
 	// return only ids and time stamps
 	return filteredTweets
 		.map(element => {
-			return { id: element.id, timeStamp: element.created_at };
+			return { id: element.id_str, timeStamp: element.created_at };
 		})
 		.slice(0, numTweets);
-	//return filteredTweets.slice(0, numTweets);
 };
 
 const findRecentPresCoronaVirusTweets = async (numTweets = 3) => {
@@ -88,13 +88,12 @@ const findRecentPresCoronaVirusTweets = async (numTweets = 3) => {
 			throw 'No applicable tweets found for given user';
 	}
 
-	// return only ids and time stamps TODO use numTweets to return only a certain number of tweets
+	// return only ids and time stamps
 	return filteredTweets
 		.map(element => {
-			return { id: element.id, timeStamp: element.created_at };
+			return { id: element.id_str, timeStamp: element.created_at };
 		})
 		.slice(0, numTweets);
-	//return filteredTweets.slice(0, numTweets);
 };
 
 const findRecentCDCCoronaVirusTweets = async (numTweets = 3) => {
@@ -116,13 +115,12 @@ const findRecentCDCCoronaVirusTweets = async (numTweets = 3) => {
 			throw 'No applicable tweets found for given user';
 	}
 
-	// return only ids and time stamps TODO use numTweets to return only a certain number of tweets
+	// return only ids and time stamps
 	return filteredTweets
 		.map(element => {
-			return { id: element.id, timeStamp: element.created_at };
+			return { id: element.id_str, timeStamp: element.created_at };
 		})
 		.slice(0, numTweets);
-	//return filteredTweets.slice(0, numTweets);
 };
 
 const findRecentSurgeonGeneralCoronaVirusTweets = async (numTweets = 3) => {
@@ -144,13 +142,39 @@ const findRecentSurgeonGeneralCoronaVirusTweets = async (numTweets = 3) => {
 			throw 'No applicable tweets found for given user';
 	}
 
-	// return only ids and time stamps TODO use numTweets to return only a certain number of tweets
+	// return only ids and time stamps
 	return filteredTweets
 		.map(element => {
-			return { id: element.id, timeStamp: element.created_at };
+			return { id: element.id_str, timeStamp: element.created_at };
 		})
 		.slice(0, numTweets);
-	// return filteredTweets.slice(0, numTweets);
+};
+
+const findRecentWHOCoronaVirusTweets = async (numTweets = 3) => {
+	const whoTwitterHandle = 'WHO';
+	const tweets = await getTweetsByUsername(whoTwitterHandle);
+
+	let filteredTweets = filterTweets(tweets);
+
+	if (!filteredTweets.length) {
+		const tweetsWithRetweets = await getTweetsByUsername(
+			whoTwitterHandle,
+			true,
+		);
+
+		// If there are no tweets, try getting tweets again but including retweets this time
+		filteredTweets = filterTweets(tweetsWithRetweets);
+
+		if (!filteredTweets.length)
+			throw 'No applicable tweets found for given user';
+	}
+
+	// return only ids and time stamps
+	return filteredTweets
+		.map(element => {
+			return { id: element.id_str, timeStamp: element.created_at };
+		})
+		.slice(0, numTweets);
 };
 
 module.exports = {
@@ -159,4 +183,5 @@ module.exports = {
 	findRecentPresCoronaVirusTweets,
 	findRecentCDCCoronaVirusTweets,
 	findRecentSurgeonGeneralCoronaVirusTweets,
+	findRecentWHOCoronaVirusTweets,
 };

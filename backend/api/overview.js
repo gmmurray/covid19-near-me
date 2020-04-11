@@ -5,15 +5,16 @@ const {
 	findRecentPresCoronaVirusTweets,
 	findRecentCDCCoronaVirusTweets,
 	findRecentSurgeonGeneralCoronaVirusTweets,
+	findRecentWHOCoronaVirusTweets,
 } = require('../services/twitterAPI');
 const { getCountryData } = require('../services/novelCovidAPI');
 const { getStateData } = require('../services/novelCovidAPI');
 const { getWorldData } = require('../services/novelCovidAPI');
 
-router.get('/', async (req, res) => {
+router.get('/:state', async (req, res) => {
 	const govTweets = await asyncTryCatchWrapper(
 		findRecentGovCoronaVirusTweets,
-		req.query.state,
+		req.params.state,
 	);
 	const presTweets = await asyncTryCatchWrapper(
 		findRecentPresCoronaVirusTweets,
@@ -25,17 +26,30 @@ router.get('/', async (req, res) => {
 		findRecentSurgeonGeneralCoronaVirusTweets,
 	);
 
-	const stateData = await asyncTryCatchWrapper(getStateData, req.query.state);
+	const whoTweets = await asyncTryCatchWrapper(
+		findRecentWHOCoronaVirusTweets,
+	);
+
+	const stateData = await asyncTryCatchWrapper(
+		getStateData,
+		req.params.state,
+	);
 	const countryData = await asyncTryCatchWrapper(getCountryData, 'USA');
 	const worldData = await asyncTryCatchWrapper(getWorldData);
 	res.json({
-		govTweets,
-		presTweets,
-		cdcTweets,
-		surgeonGeneralTweets,
-		stateData,
-		countryData,
-		worldData,
+		state: req.params.state,
+		tweetData: {
+			govTweets,
+			presTweets,
+			cdcTweets,
+			surgeonGeneralTweets,
+			whoTweets,
+		},
+		locationData: {
+			stateData,
+			countryData,
+			worldData,
+		},
 	});
 });
 

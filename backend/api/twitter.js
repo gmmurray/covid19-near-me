@@ -4,6 +4,7 @@ const {
 	findRecentPresCoronaVirusTweets,
 	findRecentCDCCoronaVirusTweets,
 	findRecentSurgeonGeneralCoronaVirusTweets,
+	findRecentWHOCoronaVirusTweets,
 } = require('../services/twitterAPI');
 
 router.get('/governor', async (req, res) => {
@@ -36,6 +37,15 @@ router.get('/cdc', async (req, res) => {
 router.get('/surgeon-general', async (req, res) => {
 	try {
 		const result = await findRecentSurgeonGeneralCoronaVirusTweets();
+		res.json(result);
+	} catch (error) {
+		res.json({ error });
+	}
+});
+
+router.get('/who', async (req, res) => {
+	try {
+		const result = await findRecentWHOCoronaVirusTweets();
 		res.json(result);
 	} catch (error) {
 		res.json({ error });

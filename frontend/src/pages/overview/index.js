@@ -11,7 +11,7 @@ const Overiew = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [networkError, setNetworkError] = useState(false);
 
-	const updateOverviewData = async (state) => {
+	const updateOverviewData = async state => {
 		setIsLoading(true);
 		setNetworkError(false);
 
@@ -68,7 +68,6 @@ const Overiew = () => {
 					size={'fullwidth'}
 					isLoading={isLoading}
 				/>
-
 				{renderOverviewData()}
 			</Container>
 		</>
