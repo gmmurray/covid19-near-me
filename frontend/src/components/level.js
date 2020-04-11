@@ -2,10 +2,11 @@ import React from 'react';
 import Section from './section';
 
 const Level = (props) => {
-	const { title, subtitle, items } = props;
+    const { title, subtitle, items, titleSize } = props;
+    const title_cn = titleSize ? `is-size-${titleSize}` : 'is-size-1';
 	return (
 		<Section withContainer>
-			<h1 className="is-size-1">{title}</h1>
+			{title ? <h1 className={title_cn}>{title}</h1> : ''}
 			{subtitle ? <h5 className="subtitle is-5">{subtitle}</h5> : ''}
 			<nav className="level">
 				{items.map((element, index) => (

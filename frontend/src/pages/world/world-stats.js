@@ -1,11 +1,15 @@
 import React from 'react';
 import Spinner from '../../components/spinner';
 import Container from '../../components/container';
+import Level from '../../components/level';
+import { createWorldItems } from '../../util/levelItemsHelper';
 
 const WorldStats = props => {
-	const { cases, deaths, recovered, active, updated } = props.data;
+	const updatedDate = new Date(props.data.updated);
 
-	const updatedDate = new Date(updated);
+	const title = 'Worldwide Stats';
+	const subtitle = `Last updated ${updatedDate.toDateString()}`;
+	const items = createWorldItems(props.data);
 
 	if (props.networkError) {
 		return (
@@ -30,42 +34,7 @@ const WorldStats = props => {
 		);
 	}
 
-	return (
-		<section className="section">
-			<Container className="has-text-centered">
-				<h1 className="is-size-1">Worldwide Stats</h1>
-				<h5 className="subtitle is-5">
-					Last updated {updatedDate.toDateString()}
-				</h5>
-				<nav className="level">
-					<div className="level-item has-text-centered">
-						<div>
-							<p className="heading">Cases</p>
-							<p className="title">{cases}</p>
-						</div>
-					</div>
-					<div className="level-item has-text-centered">
-						<div>
-							<p className="heading">Deaths</p>
-							<p className="title">{deaths}</p>
-						</div>
-					</div>
-					<div className="level-item has-text-centered">
-						<div>
-							<p className="heading">Active</p>
-							<p className="title">{active}</p>
-						</div>
-					</div>
-					<div className="level-item has-text-centered">
-						<div>
-							<p className="heading">Recovered</p>
-							<p className="title">{recovered}</p>
-						</div>
-					</div>
-				</nav>
-			</Container>
-		</section>
-	);
+	return <Level title={title} subtitle={subtitle} items={items} />;
 };
 
 export default WorldStats;

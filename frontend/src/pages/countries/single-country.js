@@ -2,37 +2,15 @@ import React from 'react';
 import Spinner from '../../components/spinner';
 import Container from '../../components/container';
 import Level from '../../components/level';
+import { createCountryItems } from '../../util/levelItemsHelper';
 
-const SingleCountry = props => {
-	const {
-		message,
-		country,
-		cases,
-		todayCases,
-		deaths,
-		todayDeaths,
-		recovered,
-		active,
-		critical,
-		casesPerOneMillion,
-		deathsPerOneMillion,
-		updated,
-	} = props.currentCountry;
+const SingleCountry = (props) => {
+	const { message, country, updated } = props.currentCountry;
 
 	const updatedDate = new Date(updated);
 	const subtitle = `Last Updated ${updatedDate.toDateString()}`;
-	
-	const items = [
-		{name: 'Cases', statistic: cases},
-		{name: 'Cases Today', statistic: todayCases},
-		{name: 'Deaths', statistic: deaths},
-		{name: 'Deaths Today', statistic: todayDeaths},
-		{name: 'Recovered', statistic: recovered},
-		{name: 'Active', statistic: active},
-		{name: 'Critical', statistic: critical},
-		{name: 'Cases/Million', statistic: casesPerOneMillion},
-		{name: 'Deaths/Million', statistic: deathsPerOneMillion},
-	];
+
+	const items = createCountryItems(props.currentCountry);
 
 	if (props.networkError) {
 		return (
@@ -77,9 +55,7 @@ const SingleCountry = props => {
 		);
 	}
 
-	return (
-		<Level title={country} subtitle={subtitle} items={items} />
-	);
+	return <Level title={country} subtitle={subtitle} items={items} />;
 };
 
 export default SingleCountry;

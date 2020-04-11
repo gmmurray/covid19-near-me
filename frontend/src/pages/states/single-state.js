@@ -2,24 +2,10 @@ import React from 'react';
 import Spinner from '../../components/spinner';
 import Container from '../../components/container';
 import Level from '../../components/level';
+import { createStateItems } from '../../util/levelItemsHelper';
 
 const SingleState = (props) => {
-	const {
-		state,
-		cases,
-		todayCases,
-		deaths,
-		todayDeaths,
-		active,
-	} = props.currentState;
-
-	const items = [
-		{ name: 'Cases', statistic: cases },
-		{ name: 'Cases Today', statistic: todayCases },
-		{ name: 'Deaths', statistic: deaths },
-		{ name: 'Deaths Today', statistic: todayDeaths },
-		{ name: 'Active', statistic: active },
-	];
+	const items = createStateItems(props.currentState);
 
 	if (props.networkError) {
 		return (
@@ -44,7 +30,7 @@ const SingleState = (props) => {
 		);
 	}
 
-	if (!state) {
+	if (!props.currentState.state) {
 		return (
 			<section className="section">
 				<Container className="has-text-centered">
@@ -54,9 +40,7 @@ const SingleState = (props) => {
 		);
 	}
 
-	return (
-		<Level title={state} items={items} />
-	);
+	return <Level title={props.currentState.state} items={items} />;
 };
 
 export default SingleState;
