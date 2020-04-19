@@ -1,30 +1,31 @@
 // This service uses the great API provided by the NovelCOVID repository https://github.com/NovelCOVID/API
-const covid = require('novelcovid');
 const axios = require('axios');
+const NovelCovid = require('novelcovid');
 
 const getStateData = async state => {
-	let result = state
-		? await covid.getState({ state })
-		: await covid.getState();
-	return result;
+	const result = state
+		? await axios.get(`https://corona.lmao.ninja/v2/states/${state}`)
+		: await axios.get('https://corona.lmao.ninja/v2/states');
+	return result.data;
 };
 
 const getCountryData = async country => {
-	let result = country
-		? await covid.getCountry({ country })
-		: await covid.getCountry();
-	return result;
+	const result = country
+		? await axios.get(`https://corona.lmao.ninja/v2/countries/${country}`)
+		: await axios.get('https://corona.lmao.ninja/v2/countries');
+	return result.data;
 };
 
 const getSortedCountryData = async sort => {
-	let result = sort
-		? await covid.getCountry({ sort })
-		: await covid.getCountry();
-	return result;
+	const result = sort
+		? await axios.get(`https://corona.lmao.ninja/v2/countries?sort=${sort}`)
+		: await axios.get('https://corona.lmao.ninja/v2/countries');
+	return result.data;
 };
 
 const getWorldData = async () => {
-	return await covid.getAll();
+	const result = await axios.get('https://corona.lmao.ninja/v2/all');
+	return result.data;
 };
 
 const getHistoricalData = async country => {
